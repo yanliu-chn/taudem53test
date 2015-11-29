@@ -14,6 +14,15 @@ roger)
 	rdir=/gpfs/largeblockFS/scratch/gisolve/taudem/test
 	;;
 stampede)
+	demdir="$WORK/taudem53test/data"
+	mpiclause="ibrun"
+	nplists=("256 128 64 32 16" "1024 512 256 128 64") 
+	scheduler=slurm
+	taudem1=$WORK/TauDEM/build/bin
+	taudem2=$WORK/TauDEM-5.3.1
+	ppn=16
+	wtime="48:00:00"
+	rdir=$WORK/taudem53test/test
 	;;
 *)
 	echo "Usage: $0 roger|stampede"

@@ -1,6 +1,6 @@
 #!/bin/bash
 # workflow execution script
-# Usage: taudemrun.sh testname mpi_clause taudem1 dem1 taudem2 dem2
+# Usage: taudemrun.sh testname mpi_clause taudem1 dem1 taudem2 dem2 threshold
 
 testname="$1"
 testname1="${testname}1"
@@ -10,6 +10,7 @@ taudem1="$3" # 5.0MF
 dem1="$4" # dem dir
 taudem2="$5" # 5.3+
 dem2="$6" # vrt
+threshold="$7" # threshold value dep on data size
 log="./run.log"
 
 touch .start
@@ -62,14 +63,14 @@ echo "###2 aread8 `expr $T2 \- $T1` "
 echo "======================================================="
 echo "step: threshold"
 T1=`date +%s`
-${mpiclause} ${taudem1}/threshold -thresh 300  -ssa ./${testname1}ad8o  -src ./${testname1}src  -mf 1 1
+${mpiclause} ${taudem1}/threshold -thresh $threshold  -ssa ./${testname1}ad8o  -src ./${testname1}src  -mf 1 1
 T2=`date +%s`
 gdalbuildvrt ./${testname1}src.vrt ./${testname1}src/*.tif
 gdal_translate -of GTiff ./${testname1}src.vrt ./${testname1}src.tif
 T3=`date +%s`
 echo "###1 threshold `expr $T2 \- $T1` `expr $T3 \- $T2` `expr $T3 \- $T1`"
 T1=`date +%s`
-${mpiclause} ${taudem2}/threshold -thresh 300  -ssa ./${testname2}ad8o.tif  -src ./${testname2}src.tif
+${mpiclause} ${taudem2}/threshold -thresh $threshold  -ssa ./${testname2}ad8o.tif  -src ./${testname2}src.tif
 T2=`date +%s`
 echo "###2 threshold `expr $T2 \- $T1` "
 

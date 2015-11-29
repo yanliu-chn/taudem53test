@@ -29,6 +29,7 @@ stampede)
 	exit 1
 esac
 dlist=("Yellowstone/YellowMF" "Chesapeake/ches10mMF")
+thlist=("2000" "8000")
 if [ ! -d $rdir ]; then
 	mkdir -p $rdir
 fi
@@ -70,7 +71,8 @@ echo "cd $wdir" >> $jfile
 if [ "$mpiclause" == "mpirun" ]; then
 	mpiclause="$mpiclause -np $np "
 fi
-echo "`pwd`/taudemrun.sh $d2 \"$mpiclause\" $taudem1 $dem1 $taudem2 $dem2" >> $jfile 
+th=${thlist[$testcase]}
+echo "`pwd`/taudemrun.sh $d2 \"$mpiclause\" $taudem1 $dem1 $taudem2 $dem2 $th" >> $jfile 
 ###############
 done
 

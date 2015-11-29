@@ -1,0 +1,12 @@
+#!/bin/bash
+#PBS -N __NAME__
+#PBS -A default
+#PBS -e __STDERR__
+#PBS -o __STDOUT__
+#PBS -l nodes=__NN__:ppn=__PPN__,walltime=__T__
+#PBS -M yanliu@cybergis.org
+#PBS -m be
+#PBS -S /bin/bash
+#PBS -V
+
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH -A TG-EAR130008
+#SBATCH -J __NAME__
+#SBATCH -p normal
+#SBATCH -o __STDOUT__
+#SBATCH -e __STDERR__
+##SBATCH -S /bin/bash
+#SBATCH -t __T__
+#SBATCH -n __N__
+#SBATCH -N __NN__
+#SBATCH --mail-user=yanliu@cybergis.org
+#SBATCH --mail-type=begin
+#SBATCH --mail-type=end

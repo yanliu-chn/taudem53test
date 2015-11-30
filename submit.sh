@@ -4,7 +4,7 @@ cluster=$1
 case "$cluster" in
 roger)
 	demdir="$HOME/scratch/taudem/data"
-	mpiclause="mpirun"
+	mpibin="mpirun"
 	nplists=("160 80 40 20" "500 400 300 200 100 60 40") 
 	scheduler=pbs
 	taudem1=/sw/geosoft/TauDEM/bin
@@ -15,7 +15,7 @@ roger)
 	;;
 stampede)
 	demdir="$WORK/taudem53test/data"
-	mpiclause="ibrun"
+	mpibin="ibrun"
 	nplists=("256 128 64 32 16" "1024 512 256 128 64") 
 	scheduler=slurm
 	taudem1=$WORK/TauDEM/build/bin
@@ -68,8 +68,8 @@ sed -e "s|__NAME__|$j|" \
 # work dir
 echo "cd $wdir" >> $jfile
 # exec
-if [ "$mpiclause" == "mpirun" ]; then
-	mpiclause="$mpiclause -np $np "
+if [ "$mpibin" == "mpirun" ]; then
+	mpiclause="$mpibin -np $np "
 fi
 th=${thlist[$testcase]}
 echo "`pwd`/taudemrun.sh $d2 \"$mpiclause\" $taudem1 $dem1 $taudem2 $dem2 $th" >> $jfile 
